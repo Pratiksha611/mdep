@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Pratiksha Deshmukh
@@ -19,12 +20,11 @@ import java.util.Date;
 @ToString
 public class ConnectionDTO
 {
-    private String id;
-    private String connectionName;
+    private String connectionId;
     private ConnectionType connectionType;
-    private String connectionConfiguration;
-    private Date createdDate;
-    private Date updatedDate;
+    private Date createdOn = new Date();
+    private Date updatedOn = new Date();
+    private List<ConnectionConfigDTO> connectionConfig;
 
     public ConnectionDTO(Connection connection)
     {

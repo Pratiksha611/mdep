@@ -1,7 +1,6 @@
 package com.pratiket.connection.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pratiket.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,46 +8,47 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 /**
- * @author Pratiksha Deshmukh
- * created on 07-08-2021
+ * @author Prtiksha Deshmukh
+ * created on 25-08-2021
  */
 @Entity
-@Table(name = "CONNECTIONS")
+@Table(name = "CONNECTIONS_CONFIG")
 @NoArgsConstructor
 @Log4j2
 @Setter
 @Getter
-@ToString
-public class Connection
+@ToString(exclude = {"connection"})
+public class ConnectionConfig
 {
+
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "CONNECTION_ID", unique = true, nullable = false, updatable = false)
-    @NotBlank(message = "CONNECTION_ID can not be empty.")
-    private String connectionId;
+    @Column(name = "CONNECTION_CONFIG_ID", unique = true, nullable = false, updatable = false)
+    @NotBlank(message = "CONNECTION_CONFIG_ID can not be empty.")
+    private String connectionConfigId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CONNECTION_TYPE", nullable = false)
-    @NotNull(message = "CONNECTION_TYPE can be either MYSQL, ORACLE OR MONGODB")
-    private ConnectionType connectionType;
+    @Column(name = "CONNECTION_NAME", nullable = false)
+    private String connectionName;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "connection")
-    private List<ConnectionConfig> connectionConfig;
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "CONNECTION_CONFIGURATION", nullable = false)
+    private String connectionConfiguration;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CONNECTION_ID", nullable = false)
+    private Connection connection;
 
     @Column(name = "CREATED_ON", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
