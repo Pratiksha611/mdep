@@ -1,6 +1,8 @@
 package com.pratiket.connection.controller;
 
 import com.pratiket.connection.entity.Connection;
+import com.pratiket.connection.entity.ConnectionConfig;
+import com.pratiket.connection.entity.ConnectionType;
 import com.pratiket.connection.service.ConnectionService;
 import com.pratiket.connection.dto.ConnectionDTO;
 import com.pratiket.exception.ConnectionException;
@@ -24,7 +26,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class ConnectionController {
 
-    static final String ROOT = "/api";
+    static final String ROOT = "/api/connections/";
 
     @Autowired
     private ConnectionService connectionService;
@@ -33,6 +35,30 @@ public class ConnectionController {
     public ResponseEntity<List<Connection>> getAllConnections() {
         try {
             return new ResponseEntity<List<Connection>>(connectionService.getAllConnections(), HttpStatus.OK);
+        } catch (ConnectionException e) {
+            log.error("Error occurred while retrieving connections - " + e);
+            throw ConnectionException.builder()
+                    .message(e.getMessage())
+                    .detailMessage(ExceptionUtils.getStackTrace(e)).build();
+        }
+    }
+
+    @GetMapping(value = "/v1/getConnectionByConnectionId/connectionId={connectionId}", headers = "Accept=application/json")
+    public ResponseEntity<Connection> getConnectionByConnectionId(@PathVariable("connectionId") String connectionId) {
+        try {
+            return new ResponseEntity<Connection>(connectionService.getConnectionByConnectionId(connectionId), HttpStatus.OK);
+        } catch (ConnectionException e) {
+            log.error("Error occurred while retrieving connections - " + e);
+            throw ConnectionException.builder()
+                    .message(e.getMessage())
+                    .detailMessage(ExceptionUtils.getStackTrace(e)).build();
+        }
+    }
+
+    @GetMapping(value = "/v1/getConnectionByConnectionType/connectionType={connectionType}", headers = "Accept=application/json")
+    public ResponseEntity<Connection> getConnectionByConnectionType(@PathVariable("connectionType") ConnectionType connectionType) {
+        try {
+            return new ResponseEntity<Connection>(connectionService.getConnectionByConnectionType(connectionType), HttpStatus.OK);
         } catch (ConnectionException e) {
             log.error("Error occurred while retrieving connections - " + e);
             throw ConnectionException.builder()
@@ -50,6 +76,18 @@ public class ConnectionController {
         }
         catch (ConnectionException e) {
             log.error("Error occurred while creating connections - " + e);
+            throw ConnectionException.builder()
+                    .message(e.getMessage())
+                    .detailMessage(ExceptionUtils.getStackTrace(e)).build();
+        }
+    }
+
+    @GetMapping(value = "/v1/getConnectionByConnectionConfigId/connectionConfigId={connectionConfigId}", headers = "Accept=application/json")
+    public ResponseEntity<ConnectionConfig> getConnectionByConnectionConfigId(@PathVariable("connectionConfigId") String connectionConfigId) {
+        try {
+            return new ResponseEntity<ConnectionConfig>(connectionService.getConnectionByConnectionConfigId(connectionConfigId), HttpStatus.OK);
+        } catch (ConnectionException e) {
+            log.error("Error occurred while retrieving connections - " + e);
             throw ConnectionException.builder()
                     .message(e.getMessage())
                     .detailMessage(ExceptionUtils.getStackTrace(e)).build();

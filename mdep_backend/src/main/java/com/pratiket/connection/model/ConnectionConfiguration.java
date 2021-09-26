@@ -15,8 +15,11 @@ public class ConnectionConfiguration
 {
     private String host;
     private String port;
+    private String username;
+    private String password;
     private String database;
     private String schema;
     private String collection;
+    private String table;
 
 }

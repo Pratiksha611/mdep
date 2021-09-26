@@ -27,4 +27,5 @@ public class ConnectionConfigDTO
     private String connectionConfiguration;
     private Date createdOn = new Date();
     private Date updatedOn = new Date();
+
 }
