@@ -116,7 +116,7 @@ class Reader extends Component
                     <select value={this.state.connectionName} onChange={this.onConnectionNameChange}>
                         <option>Select Connection</option>
                         {
-                            connections.length 
+                            connections && connections.length 
                             ?  connections.map(connection => <option key={connection.connectionName}>{connection.connectionName}</option>) 
                             : null                        
                         }
@@ -130,7 +130,7 @@ class Reader extends Component
                     <option>Select Database</option>
                     {
                         
-                        databases.length 
+                        databases && databases.length 
                         ?  databases.map(database => <option key={database}>{database}</option>) 
                         : null                        
                     }
@@ -143,7 +143,7 @@ class Reader extends Component
                 <select value={this.state.table} onChange={this.onTableChange}>
                     <option>Select</option>
                     {
-                        tables.length 
+                        tables && tables.length 
                         ?  tables.map(table => <option key={table}>{table}</option>) 
                         : null                        
                     }
@@ -156,7 +156,7 @@ class Reader extends Component
                 <button onClick={this.onSaveClick}>Save</button>
             </div>
         }
-        if(this.state.connectionType === 'MYSQL')
+        if(this.state.connectionType === 'MYSQL' || this.state.connectionType === 'MONGODB')
         {
             configuration = <div>
                 <form>
@@ -165,20 +165,6 @@ class Reader extends Component
                     {tablesContent}
                     {buttonContent}
                 </form>
-            </div>
-        }
-        else if(this.state.connectionType === 'MONGODB')
-        {
-            configuration = <div>
-                <select value={this.state.connectionName} onChange={this.onConnectionNameChange}>
-                    <option>Select Connection</option>
-                    {
-                        
-                        connections.length 
-                        ?  connections.map(connection => <option key={connection.connectionName}>{connection.connectionName}</option>) 
-                        : null                        
-                    }
-                    </select>
             </div>
         }
         return(
@@ -190,7 +176,7 @@ class Reader extends Component
                     <option>Select Connection Type</option>
                     {
                         
-                        connectionTypes.length 
+                        connectionTypes && connectionTypes.length 
                         ?  connectionTypes.map(connectionType => <option key={connectionType}>{connectionType}</option>) 
                         : null   
                     }
