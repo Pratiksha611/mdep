@@ -31,8 +31,6 @@ public class ConnectorServiceFactory implements ServiceFactory
         {
             case MONGODB:
                 return mongoDBConnectorService;
-            case ORACLE:
-                return oracleConnectorService;
             case MYSQL:
             default:
                 return mysqlConnectorService;

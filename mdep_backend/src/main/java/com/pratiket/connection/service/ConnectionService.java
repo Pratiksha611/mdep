@@ -22,4 +22,6 @@ public interface ConnectionService
     Connection getConnectionByConnectionType(ConnectionType connectionType);
 
     ConnectionConfig getConnectionByConnectionConfigId(String connectionConfigId);
+
+    List<ConnectionType> getAllConnectionTypes();
 }

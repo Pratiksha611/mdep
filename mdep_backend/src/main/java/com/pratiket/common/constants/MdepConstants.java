@@ -27,7 +27,7 @@ public final class MdepConstants {
     {
         public static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
         public static final String CONNECTION_URL = "jdbc:mysql://%s:%s?useSSL=false";
-        public static final String SPARK_CONNECTION_URL = "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false";
+        public static final String SPARK_CONNECTION_URL = "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
         public static final String SHOW_DATABASE_QUERY = "SELECT schema_name  FROM information_schema.schemata;";
         public static final String GET_TABLE_QUERY = "SELECT table_name FROM information_schema.tables WHERE table_schema = '%s';";
         public static final String JDBC = "jdbc";

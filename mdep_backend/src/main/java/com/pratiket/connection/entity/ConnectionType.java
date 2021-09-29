@@ -7,6 +7,5 @@ package com.pratiket.connection.entity;
 public enum ConnectionType
 {
     MYSQL,
-    ORACLE,
     MONGODB;
 }

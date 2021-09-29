@@ -64,7 +64,7 @@ public class ConnectorController
     }
 
     @GetMapping(value = "/v1/getTableList/connectionConfigurationId={connectionConfigurationId}/connectionType={connectionType}/databaseName={databaseName}", headers = "Accept=application/json")
-    public ResponseEntity<List<String>> getTableList(@PathVariable("connectionConfigurationId") String connectionConfigurationId, @PathVariable("connectionType") ConnectionType connectionType, String databaseName) {
+    public ResponseEntity<List<String>> getTableList(@PathVariable("connectionConfigurationId") String connectionConfigurationId, @PathVariable("connectionType") ConnectionType connectionType, @PathVariable("databaseName") String databaseName) {
         try {
             return new ResponseEntity<List<String>>(serviceFactory.getConnectorService(connectionType).getTableList(connectionConfigurationId, databaseName), HttpStatus.OK);
         } catch (ConnectionException e) {

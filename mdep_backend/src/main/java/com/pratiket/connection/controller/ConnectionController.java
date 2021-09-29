@@ -43,6 +43,18 @@ public class ConnectionController {
         }
     }
 
+    @GetMapping(value = "/v1/getAllConnectionTypes", headers = "Accept=application/json")
+    public ResponseEntity<List<ConnectionType>> getAllConnectionTypes() {
+        try {
+            return new ResponseEntity<List<ConnectionType>>(connectionService.getAllConnectionTypes(), HttpStatus.OK);
+        } catch (ConnectionException e) {
+            log.error("Error occurred while retrieving connections - " + e);
+            throw ConnectionException.builder()
+                    .message(e.getMessage())
+                    .detailMessage(ExceptionUtils.getStackTrace(e)).build();
+        }
+    }
+
     @GetMapping(value = "/v1/getConnectionByConnectionId/connectionId={connectionId}", headers = "Accept=application/json")
     public ResponseEntity<Connection> getConnectionByConnectionId(@PathVariable("connectionId") String connectionId) {
         try {

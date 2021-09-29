@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Pratiksha Deshmukh
@@ -75,5 +76,10 @@ public class ConnectionServiceImpl extends AbstractConnectionService
     @Override
     public ConnectionConfig getConnectionByConnectionConfigId(String connectionConfigId) {
         return connectionConfigRepository.findById(connectionConfigId).orElse(null);
+    }
+
+    @Override
+    public List<ConnectionType> getAllConnectionTypes() {
+        return Arrays.asList(ConnectionType.values());
     }
 }
