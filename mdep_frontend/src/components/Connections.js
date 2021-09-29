@@ -99,7 +99,7 @@ class Connections extends Component
             "connectionConfig": [
               {
                 "connectionName": connectionName,
-                "connectionConfiguration": "{\"host\": "+host+",\"port\": "+port+", \"username\": "+username+",\"password\": "+password+"}"
+                "connectionConfiguration": "{\"host\": \""+host+"\",\"port\": \""+port+"\", \"username\": \""+username+"\",\"password\": \""+password+"\"}"
               }
             ],
             "connectionType": connectionType
@@ -123,14 +123,38 @@ class Connections extends Component
         let configuration;
         if(this.state.connectionType === 'MYSQL' || this.state.connectionType === 'MONGODB')
         {
-            configuration = <div>
-                <input type="text" value={this.state.connectionName} onChange={this.onConnectionNameChange} placeholder="connection name"></input>
-                <input type="text" value={this.state.host} onChange={this.onHostChange} placeholder="host"></input>
-                <input type="text" value={this.state.port} onChange={this.onPortChange} placeholder="port"></input>
-                <input type="text" value={this.state.username} onChange={this.onUsernameChange} placeholder="username"></input>
-                <input type="password" value={this.state.password} onChange={this.onPasswordChange} placeholder="password"></input>
-                <button type="submit" onClick={this.onTestClick}>Test</button>
-                <button type="submit" onClick={this.onSaveClick}>Save</button>
+            configuration = <div class="table">
+                <table class="table text-center">
+                    <tr>
+                        <td>
+                            &nbsp;Connection Name&nbsp; <input type="text" value={this.state.connectionName} onChange={this.onConnectionNameChange}></input><br></br><br></br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp; Host Name&nbsp;<input type="text" value={this.state.host} onChange={this.onHostChange}></input><br></br><br></br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp; Port Number&nbsp;<input type="text" value={this.state.port} onChange={this.onPortChange}></input><br></br><br></br>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>
+                            &nbsp; Username&nbsp; <input type="text" value={this.state.username} onChange={this.onUsernameChange}></input><br></br><br></br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp; Password&nbsp;<input type="password" value={this.state.password} onChange={this.onPasswordChange}></input><br></br><br></br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <button type="submit" onClick={this.onTestClick}>Test</button> &nbsp; &nbsp;
+                        <button type="submit" onClick={this.onSaveClick}>Save</button>
+                    </tr>
+                </table>
             </div>
         }
         const { connectionTypes } = this.state
